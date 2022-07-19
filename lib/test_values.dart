@@ -22,7 +22,6 @@ class TestValues extends StatefulWidget {
 
 class _TestValuesState extends State<TestValues> {
   var formKey = GlobalKey<FormState>();
-
   List<ResultModel> results = [
     ResultModel(name: 'WBC', translation: 'كرات الدم البيضاء'),
     ResultModel(name: 'HGB', translation: 'الهيموغلوبين'),
@@ -109,7 +108,7 @@ class _TestValuesState extends State<TestValues> {
               keyboardType: TextInputType.number,
               onChanged: (String value) {
                 setState(() {
-                  result.strValue = value;
+                  result.value = double.parse(value);
                 });
               },
               validator: (value) {

@@ -75,8 +75,7 @@ class _ChoosePhotoState extends State<ChoosePhoto> {
     print("Request::: $request,\n");
     var res = await request.send();
 
-    var vr = Map<String, dynamic>.from(
-        json.decode(String.fromCharCodes(await res.stream.toBytes())));
+    var vr = json.decode(String.fromCharCodes(await res.stream.toBytes()));
     Map<String, String> finalresult = {};
     for (int i = 0; i < vr.length; i++) {
       var str = vr.keys.elementAt(i).replaceAll('_', ' ');

@@ -1,8 +1,11 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, sized_box_for_whitespace, avoid_print, implementation_imports
 
+import 'dart:convert';
+
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:medical_project/Models/drawer.dart';
+import 'package:medical_project/animiacovidresult.dart';
 import 'package:medical_project/generated/locale_keys.g.dart';
 import 'package:medical_project/Models/result.dart';
 import 'package:medical_project/routes.dart';
@@ -96,15 +99,32 @@ class _AfterResultState extends State<AfterResult> {
                   onPressed: () async {
                     if (widget.person.isOCRTest) {
                       finalResult = await callclasifyocr();
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AnimiaCovidResult(
+                                  widget.person,
+                                  covidanimiaresult: finalResult,
+                                )),
+                      );
                     } else {
                       finalResult = await callclasifyvalues(
-                        hemoglobin: 1,
-                        mch: 1,
-                        mchc: 1,
-                        mcv: 1,
-                        wbc: 1,
-                        mot: 1,
-                        lyt: 1,
+                        hemoglobin: widget.person.results[1].value,
+                        mch: widget.person.results[3].value,
+                        mchc: widget.person.results[4].value,
+                        mcv: widget.person.results[2].value,
+                        wbc: widget.person.results[0].value,
+                        mot: widget.person.results[6].value,
+                        lyt: widget.person.results[5].value,
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AnimiaCovidResult(
+                                  widget.person,
+                                  covidanimiaresult: finalResult,
+                                )),
                       );
                     }
                   },

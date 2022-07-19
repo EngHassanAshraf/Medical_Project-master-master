@@ -5,6 +5,7 @@ class Person {
   int? age;
   bool isLeukemiaTest = false;
   bool isOCRTest = false;
+  bool isValuesTest = false;
   String hasAnimea = "UnKnown";
   String hasCovid = "UnKnown";
   String hasLukemia = "UnKnown";
