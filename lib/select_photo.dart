@@ -30,7 +30,7 @@ class ChoosePhoto extends StatefulWidget {
 
 class _ChoosePhotoState extends State<ChoosePhoto> {
   File? image;
-  Map<String, String> ocrResult = {};
+  var ocrResult;
   Map<String, dynamic> leukemiaResult = {};
 
   var clientResult = '';
@@ -61,7 +61,8 @@ class _ChoosePhotoState extends State<ChoosePhoto> {
     }
   }
 
-  Future<Map<String, String>> getOCRresult() async {
+  // Future<Map<String, String>>
+  getOCRresult() async {
     var request = http.MultipartRequest('POST', Uri.parse(routes[1]["OCR"]));
 
     if (image == null) return {"": ""};
@@ -73,16 +74,11 @@ class _ChoosePhotoState extends State<ChoosePhoto> {
     );
 
     request.files.add(await pickimg);
-    print("Request::: $request,\n");
+    print("Request: $request,\n");
     var res = await request.send();
+    var finalresult =
+        json.decode(String.fromCharCodes(await res.stream.toBytes()));
 
-    var vr = json.decode(String.fromCharCodes(await res.stream.toBytes()));
-    Map<String, String> finalresult = {};
-    for (int i = 0; i < vr.length; i++) {
-      var str = vr.keys.elementAt(i).replaceAll('_', ' ');
-      finalresult.addAll({str: vr[vr.keys.elementAt(i)]});
-    }
-    print(vr);
     setState(() {});
     return finalresult;
   }

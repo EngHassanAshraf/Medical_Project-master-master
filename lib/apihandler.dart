@@ -79,7 +79,7 @@ class APIHandler {
 
   Person insertValuesFunction(
       {required Person person,
-      required Map<String, String> finalResult,
+      required var finalResult,
       required List<Dictionary> dictList}) {
     for (String item in finalResult.keys) {
       for (int i = 0; i < dictList.length; i++) {
