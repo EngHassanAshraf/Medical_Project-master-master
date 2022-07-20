@@ -6,6 +6,9 @@ import 'package:http_parser/http_parser.dart';
 import 'package:medical_project/routes.dart';
 import 'package:path/path.dart';
 
+import 'Models/person.dart';
+import 'Models/result.dart';
+
 class APIHandler {
   var ocrResult;
   var ocrClassifyResult;
@@ -73,4 +76,60 @@ class APIHandler {
     print(analysisResult);
     return analysisResult;
   }
+
+  Person insertValuesFunction(
+      {required Person person,
+      required Map<String, String> finalResult,
+      required List<Dictionary> dictList}) {
+    for (String item in finalResult.keys) {
+      for (int i = 0; i < dictList.length; i++) {
+        // print("1. $i");
+        if (item == dictList[i].name.toLowerCase()) {
+          // print("if=> $item : ${dictList[i].name.toLowerCase()}");
+          person.results.add(ResultModel.addNewValue(
+              name: item,
+              translation: dictList[i].translation,
+              strValue: finalResult[item]!));
+        }
+      }
+    }
+    print(person.results);
+    for (String item in finalResult.keys) {
+      for (int i = 0; i < person.results.length; i++) {
+        if (item != person.results[i].name.toLowerCase()) {
+          if (i == person.results.length - 1) {
+            person.results.add(ResultModel.noTranslation(
+                name: item, strValue: finalResult[item]!));
+          }
+          print(item);
+        }
+      }
+    }
+
+    return person;
+  }
 }
+        // else if(item != dictList[i].name.toLowerCase()){
+
+        // }
+        // break;
+        // else if (finalResult[item]! == 'Found Anemia') {
+        //   person.hasAnimea = true;
+        // } else if (finalResult[item]! == 'Found Covid') {
+        //   person.hasCovid = true;
+        // } else if (finalResult[item]! == 'Found Leukemia') {
+        //   person.hasLukemia = true;
+        // } else if (finalResult[item]! == 'No Leukemia') {
+        //   person.hasLukemia = false;
+        // } else if (finalResult[item]! == 'No Covid') {
+        //   person.hasCovid = false;
+        // } else if (finalResult[item]! == 'No Anemia') {
+        //   person.hasAnimea = false;
+        // }
+        // else if (i == dictList.length - 1) {
+        //   print("2. $i");
+
+        //   print("else=> $item : ${dictList[i].name.toLowerCase()}");
+        // person.results.add(ResultModel.noTranslation(
+        //     name: item, strValue: finalResult[item]!));
+        // }

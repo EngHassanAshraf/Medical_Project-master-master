@@ -8,19 +8,15 @@ class ResultModel {
   double value = 0.0;
   String translation;
   TextEditingController controller = TextEditingController();
-
+  
+  
   ResultModel({
     required this.name,
-    required this.translation,
+    required this.translation, 
   });
-  ResultModel.addNewValue(
-      {required this.name, required this.translation, required this.strValue});
-  ResultModel.noTranslation(
-      {required this.name,
-      required this.strValue,
-      this.translation = "لا يوجد ترجمة"});
-}
 
+  
+}
 Widget buildResulItem(ResultModel results) => Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
@@ -35,7 +31,7 @@ Widget buildResulItem(ResultModel results) => Padding(
                 child: Center(
                   child: Text(
                     results.name,
-                    style: TextStyle(fontSize: 10.0),
+                    style: TextStyle(fontSize: 20.0),
                   ),
                 ),
               ),
@@ -44,8 +40,8 @@ Widget buildResulItem(ResultModel results) => Padding(
               width: 100.0,
               child: Center(
                 child: Text(
-                  results.strValue,
-                  style: TextStyle(fontSize: 15.0),
+                  results.value.toString(),
+                  style: TextStyle(fontSize: 20.0),
                 ),
               ),
             ),
@@ -59,7 +55,7 @@ Widget buildResulItem(ResultModel results) => Padding(
                     child: Center(
                       child: Text(
                         results.translation,
-                        style: TextStyle(fontSize: 11.0),
+                        style: TextStyle(fontSize: 15.0),
                       ),
                     ),
                   ),

@@ -118,6 +118,7 @@ class _AfterResultState extends State<AfterResult> {
                         mot: widget.person.results[6].value,
                         lyt: widget.person.results[5].value,
                       );
+                      
                       Navigator.push(
                         context,
                         MaterialPageRoute(

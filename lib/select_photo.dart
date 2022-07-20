@@ -11,6 +11,7 @@ import 'package:medical_project/after_result.dart';
 import 'dart:io';
 
 import 'package:medical_project/Models/drawer.dart';
+import 'package:medical_project/apiHandler.dart';
 import 'package:medical_project/generated/locale_keys.g.dart';
 
 import 'package:http/http.dart' as http;
@@ -21,7 +22,7 @@ import 'package:path/path.dart';
 
 class ChoosePhoto extends StatefulWidget {
   http.Client client = http.Client();
-  final Person person;
+  Person person;
   ChoosePhoto(this.person, {Key? key}) : super(key: key);
   @override
   State<ChoosePhoto> createState() => _ChoosePhotoState();
@@ -260,6 +261,11 @@ class _ChoosePhotoState extends State<ChoosePhoto> {
                             if (!(widget.person.isLeukemiaTest)) {
                               ocrResult = await getOCRresult();
                               print(ocrResult);
+                              widget.person = await APIHandler()
+                                  .insertValuesFunction(
+                                      person: widget.person,
+                                      finalResult: ocrResult,
+                                      dictList: widget.person.dictionarylist);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
