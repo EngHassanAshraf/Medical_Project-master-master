@@ -6,6 +6,7 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:medical_project/Models/drawer.dart';
 import 'package:medical_project/animiacovidresult.dart';
+import 'package:medical_project/apiHandler.dart';
 import 'package:medical_project/generated/locale_keys.g.dart';
 import 'package:medical_project/Models/result.dart';
 import 'package:medical_project/routes.dart';
@@ -15,7 +16,7 @@ import 'package:http/http.dart' as http;
 
 class AfterResult extends StatefulWidget {
   final http.Client client;
-  final Person person;
+  Person person;
   var result;
   AfterResult(this.person, {required this.client, required this.result});
   @override
@@ -100,12 +101,14 @@ class _AfterResultState extends State<AfterResult> {
                     if (widget.person.isOCRTest) {
                       finalResult = await callclasifyocr();
 
+                      widget.person = APIHandler().enterResult(
+                          person: widget.person, finalfinale: finalResult);
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => AnimiaCovidResult(
                                   widget.person,
-                                  covidanimiaresult: finalResult,
                                 )),
                       );
                     } else {
@@ -118,13 +121,15 @@ class _AfterResultState extends State<AfterResult> {
                         mot: widget.person.results[6].value,
                         lyt: widget.person.results[5].value,
                       );
-                      
+                      APIHandler().enterResult(
+                          person: widget.person, finalfinale: finalResult);
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => AnimiaCovidResult(
                                   widget.person,
-                                  covidanimiaresult: finalResult,
+                                  // covidanimiaresult: finalResult,
                                 )),
                       );
                     }

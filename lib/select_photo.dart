@@ -257,11 +257,11 @@ class _ChoosePhotoState extends State<ChoosePhoto> {
                             if (!(widget.person.isLeukemiaTest)) {
                               ocrResult = await getOCRresult();
                               print(ocrResult);
-                              widget.person = await APIHandler()
-                                  .insertValuesFunction(
-                                      person: widget.person,
-                                      finalResult: ocrResult,
-                                      dictList: widget.person.dictionarylist);
+                              widget.person =
+                                  await APIHandler().insertValuesFunction(
+                                person: widget.person,
+                                finalResult: ocrResult,
+                              );
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

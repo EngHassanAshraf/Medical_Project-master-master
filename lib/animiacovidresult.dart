@@ -7,8 +7,8 @@ import 'Models/person.dart';
 
 class AnimiaCovidResult extends StatefulWidget {
   final Person person;
-  var covidanimiaresult;
-  AnimiaCovidResult(this.person, {Key? key, required this.covidanimiaresult})
+  // var covidanimiaresult;
+  AnimiaCovidResult(this.person, {Key? key, })
       : super(key: key);
 
   @override
@@ -32,8 +32,8 @@ class _AnimiaCovidResultState extends State<AnimiaCovidResult> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('${(json.decode(widget.covidanimiaresult))["Anemia Test"]}'),
-            Text('${(json.decode(widget.covidanimiaresult))["Covid Test"]}'),
+            Text(widget.person.hasAnimea?'Anemia Found' :'No Anemia found'),
+            Text(widget.person.hasCovid?'Covid Found':'No Covid Found'),
             MaterialButton(
               onPressed: () {
                 Navigator.pop(context);

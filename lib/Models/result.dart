@@ -15,10 +15,6 @@ class ResultModel {
   });
   ResultModel.addNewValue(
       {required this.name, required this.translation, required this.strValue});
-  ResultModel.noTranslation(
-      {required this.name,
-      required this.strValue,
-      this.translation = "لا يوجد ترجمة"});
 }
 
 Widget buildResulItem(ResultModel results) => Padding(
