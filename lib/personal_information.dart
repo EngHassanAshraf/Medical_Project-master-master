@@ -26,8 +26,10 @@ class _State extends State<PersonalInformation> {
   //
   sendBasicInfo(String gender, String age) async {
     Uri basicInfo = Uri.parse(routes[0]["BasicInfo"]!);
+    print("fuuffunfufnfu $basicInfo");
     var res =
         await client.post(basicInfo, body: {"gender": gender, "age": age});
+    print("fuuffunfufnfu wait");
     print("Basic Info Status Code:: ${res.statusCode}");
     print("Basic Info Status Code:: ${res.body}");
   }
@@ -312,11 +314,14 @@ class _State extends State<PersonalInformation> {
                 width: double.infinity,
                 child: MaterialButton(
                   onPressed: () {
+                    print("seeeendndnendnednend1111");
                     person.age = age;
                     isMale ? person.gender = "Male" : person.gender = "Female";
                     person.isLeukemiaTest = false;
+                    print("seeeendndnendnednend2222");
                     sendBasicInfo((person.gender!).toString().toLowerCase(),
                         (person.age).toString());
+                    print("seeeendndnendnednend33333");
                     Navigator.push(
                       context,
                       MaterialPageRoute(
